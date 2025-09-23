@@ -1,0 +1,13 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 101,
+      "title": "Pelicula simulada",
+      "overview": "Descripción de prueba",
+      "poster_path": "/poster_prueba.jpg"
+    }
+  ],
+  "total_results": 1,
+  "total_pages": 1
+}

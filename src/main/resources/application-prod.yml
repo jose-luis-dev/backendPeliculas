@@ -1,0 +1,37 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+# Base de datos en producción (se usan variables de entorno)
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:5432/${DB_PELICULAS}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate  # solo valida, no crea tablas
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+# Logging más limpio
+logging:
+  level:
+    root: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+
+# Swagger deshabilitado por seguridad
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+# CORS solo para frontend oficial en producción
+cors:
+  allowed-origins: "https://frontend-produccion.com"
