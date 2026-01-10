@@ -1,62 +1,62 @@
-# backendPeliculas
+# Backend Peliculas API
 
-Backend en Spring Boot para la búsqueda de peliculas usando la API de TMDB, gestión de usuarios y favoritos.
+API REST desarrollada con Spring Boot para la búsqueda de películas usando la API de TMDB, con autenticación de usuarios y gestión de películas favoritas mediante JWT.
+Proporciona endpoints REST documentados con **Swagger/OpenAPI** para facilitar su consumo por un frontend.
 
-Objetivo del proyecto: 
-Realizar búsqueda y gestión de películas, con autenticación de usuarios y favoritos. Proporciona endpoints REST documentados con **Swagger/OpenAPI** para facilitar su consumo por un frontend.
+## Qué demuestra este proyecto
+- Desarrollo de APIs REST con Spring Boot
+- Integración de APIs externas (TMDB)
+- Autenticación y autorización con JWT
+- Persistencia de datos con JPA / Hibernate
+- Migraciones de base de datos con Flyway
+- Documentación de endpoints con Swagger/OpenAPI
 
-----------------------------------------------------
-
-## 🔹 Tecnologías
+## Tecnologías
 
 - Java 24  
-- Spring Boot 3.5.4  
+- Spring Boot 3.5.4
+- Spring Security + JWT  
 - PostgreSQL 17.5  
 - Hibernate / JPA  
-- Flyway para migraciones de base de datos  
-- Spring Security con JWT  
-- Springdoc/OpenAPI para documentación  
+- Flyway
+- Springdoc/OpenAPI
 - Maven Wrapper (`mvnw`) para compilación y empaquetado  
 
-----------------------------------------------------
+## Funcionalidades
+- Registro y autenticación de usuarios
+- Búsqueda de películas usando la API de TMDB
+- Gestión de películas favoritas
+- Endpoints REST protegidos por JWT
 
-## 🔹 Estructura del proyecto
+## Arquitectura
+- Arquitectura en capas (Controller, Service, Repository)
+- Uso de DTOs para entrada y salida de datos
+- Separación de responsabilidades
 
-backendPeliculas/
-- ├─ src/ # Código fuente del proyecto
-- ├─ .mvn/wrapper/ # Maven Wrapper
-- ├─ pom.xml # Archivo de construcción Maven
-- ├─ mvnw, mvnw.cmd # Scripts para ejecutar Maven sin instalarlo globalmente
-- ├─ .gitignore
-- ├─ LICENSE
-- └─ README.md
+## Documentación de la API
 
-----------------------------------------------------
+- Swagger UI está disponible en:
+  http://localhost:8080/swagger-ui.html
 
-## 🔹 Configuración
+(podrás consultar todos los endpoints disponibles, sus métodos HTTP, parámetros y respuestas.)
 
-### Variables de entorno
-
+## Configuración
 El proyecto utiliza un archivo `env.properties` para almacenar datos sensibles:
+(no se sube al repositorio por seguridad).
 
-properties
-DB_HOST=localhost
-DB_PELICULAS=peliculas_db
-DB_USER=postgres
-DB_PASSWORD=tu_contraseña
-JWT_SECRET1=tu_clave_jwt
-TMDB_API_TOKEN=tu_token_tmdb
-
-"Este archivo no se sube a GitHub por seguridad."
+Variables de entorno
+DB_HOST
+DB_PELICULAS
+DB_USER
+DB_PASSWORD
+JWT_SECRET1
+TMDB_API_TOKEN
 
 ### Configuración de application.yml
-
 - application.yml: Contiene la configuración común para dev y test.
 - Los perfiles dev y prod se pueden crear para ajustar el puerto, base de datos o logging según el entorno.
 
-----------------------------------------------------
-
-## 🔹 Ejecución 
+## Ejecución 
 
   1. Clonar el repositorio:
       git clone https://github.com/jose-luis-dev/backendPeliculas.git
@@ -67,48 +67,34 @@ TMDB_API_TOKEN=tu_token_tmdb
 
   3. Ejecutar el JAR generado:
       java -jar target/backendPeliculas-SNAPSHOT.jar
-  
-  4. El backend quedará corriendo en http://localhost:8080
 
-----------------------------------------------------
+## Notas finales
+- Proyecto académico con enfoque en buenas prácticas backend
+- Puede ser consumido por cualquier frontend
+- No subir archivos con credenciales al repositorio
+
      
-## 🔹 Documentación de la API
-
-- Swagger UI está disponible en:
-  http://localhost:8080/swagger-ui.html
-
-Allí podrás consultar todos los endpoints disponibles, sus métodos HTTP, parámetros y respuestas.
-
-----------------------------------------------------
+## Endpoints principales
+- POST /auth/register
+- POST /auth/login
+- GET /movies/search
+- POST /favorites
+- GET /favorites
      
-## 🔹 Endpoints principales
+## Base de datos
+- PostgreSQL como motor principal
+- Migraciones gestionadas con Flyway
+- Creación automática de usuario administrador en entorno de desarrollo
+- Estrategia ddl-auto:
+  - dev/test: update
+  - prod: validate
 
-- Usuarios: login, registro
-- Favoritos: agregar, eliminar, listar peliculas favoritas
-- Búsqueda de peliculas: Usando la API de TMDB
-
-| Todos los endpoints están protegidos por JWT donde aplica.
-
-
-----------------------------------------------------
-     
-## 🔹 Base de datos
-
-- Se utiliza Flyway para migraciones.
-- Al iniciar, se crea un usuario admin si no existe.
-- Configuración ddl-auto:
-  - Dev/Test: update (puede crear tablas).
-  - Prod: validate (solo valida existencia de tablas).
-
-
-----------------------------------------------------
-     
-## 🔹 Notas importantes
-
-- Este backend puede ser consumido por cualquier frontend que implemente los endpoints documentados.
-- Para seguridad, no subas tu env.properties con credenciales a repositorios publicos.
-- El proyecto usa Maven Wrapper, por lo que no necesitas tener Maven instalado globalmente.
-  
-
-
+## Estructura del proyecto
+backendPeliculas/
+├─ controller/
+├─ service/
+├─ repository/
+├─ dto/
+├─ config/
+└─ security/
 
